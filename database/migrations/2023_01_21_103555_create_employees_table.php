@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('contact');
 
+            $table->foreign('company_id')->references('id')->on('companies');
+            $table->foreign('department_id')->references('id')->on('departments');
+
             $table->timestamps();
         });
     }

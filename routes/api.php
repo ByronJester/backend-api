@@ -65,7 +65,15 @@ Route::middleware([ 'cors', 'auth:api', 'client_credentials'])->group(function (
         Route::post('/', [UserController::class, 'index']);
         Route::post('/create', [UserController::class, 'create']); 
         Route::post('/update', [UserController::class, 'update']); 
-        Route::post('/delete', [UserController::class, 'delete']); 
+        Route::post('/delete', [UserController::class, 'delete']);
+    });
+
+    Route::prefix('logs')->group(function () { 
+        Route::post('/', function (Request $request) {
+            $logs = DB::table('logs')->orderBy('created_at', 'desc')->get();
+
+            return response()->json(['data' => $logs], 200);
+        });
     });
     
 });

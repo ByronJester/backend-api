@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('password');
             $table->integer('role');
             $table->rememberToken();
+
+            $table->foreign('company_id')->references('id')->on('companies');
+            
             $table->timestamps();
         });
     }

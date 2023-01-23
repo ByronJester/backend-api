@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Log;
 use App\Repositories\Departments\DepartmentRepositoryInterface; 
 
 class DepartmentController extends Controller
@@ -49,6 +50,10 @@ class DepartmentController extends Controller
     public function sendMessage(Request $request)
     {
         $contacts = $request->contacts;
+
+        Log::forceCreate([
+            'description' => $request->message
+        ]);
         
         foreach($contacts as $contact) {
             $this->repository->sendMessage($contact, $request->message); 

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('contact');
 
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }

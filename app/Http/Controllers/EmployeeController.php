@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Log;
 use App\Repositories\Employees\EmployeeRepositoryInterface;  
 
 class EmployeeController extends Controller
@@ -50,6 +51,10 @@ class EmployeeController extends Controller
     {
         $contacts = $request->contacts;
         
+        Log::forceCreate([
+            'description' => $request->message
+        ]);
+
         foreach($contacts as $contact) {
             $this->repository->sendMessage($contact, $request->message); 
         }
